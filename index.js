@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const routerApi = require('./routes');
 const {
   logErrors,
@@ -7,10 +8,11 @@ const {
 } = require('./middlewares/error.handler');
 
 const app = express();
-const port = 4001;
+const port = process.env.PORT || 4001;
 
 // middlewares
 app.use(express.json());
+app.use(cors());
 
 // routes
 app.get('/', (req, res) => {
