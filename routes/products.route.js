@@ -20,10 +20,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-router.get('/filter', async (req, res) => {
-  res.send('Yo soy un filter');
-});
-
 router.get(
   '/:id',
   validatorHandler(getProductSchema, 'params'),
@@ -72,15 +68,19 @@ router.patch(
   }
 );
 
-router.delete('/:id', async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const rta = await service.delete(id);
+router.delete(
+  '/:id',
+  validatorHandler(getProductSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const rta = await service.delete(id);
 
-    res.json(rta);
-  } catch (err) {
-    next(err);
+      res.json(rta);
+    } catch (err) {
+      next(err);
+    }
   }
-});
+);
 
 module.exports = router;
