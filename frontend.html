@@ -4,14 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Test</title>
+    <title>Platzi Store Test</title>
   </head>
   <body>
     <script>
       (async () => {
-        const res = await fetch("http://localhost:4001/api/v1/products");
-        const data = await res.json();
-        console.log(data);
+        try {
+          const response = await fetch("http://localhost:4001/api/v1/products");
+          const data = await response.json();
+          console.log(data);
+        } catch (error) {
+          console.log(error);
+        }
       })();
     </script>
   </body>
