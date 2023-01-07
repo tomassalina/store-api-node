@@ -9,7 +9,7 @@ const {
 const config = require('./config');
 
 const app = express();
-const port = config.port || 4000;
+const port = config.port;
 const whitelist = ['http://localhost:5500', 'https://myapp.co'];
 
 // middlewares

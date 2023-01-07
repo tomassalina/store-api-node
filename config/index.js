@@ -1,5 +1,6 @@
 const config = {
-  port: process.env.PORT,
+  env: process.env.NODE_ENV || 'development',
+  port: process.env.PORT || 4000,
   dbHost: process.env.DB_HOST,
   dbPort: process.env.DB_PORT,
   dbName: process.env.DB_NAME,
