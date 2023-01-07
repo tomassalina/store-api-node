@@ -4,6 +4,13 @@ services:
     build: .
     ports:
       - 4000:4000
+    environment:
+      PORT: ${PORT}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
     volumes:
       - .:/usr/src
       - /usr/src/node_modules
@@ -22,4 +29,3 @@ services:
       - platzi_store_db:/var/lib/postgresql/data
 volumes:
   platzi_store_db: {}
-
