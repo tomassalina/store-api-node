@@ -12,8 +12,8 @@ const ormErrorHandler = (err, req, res, next) => {
       message: err.name,
       errors: err.errors,
     });
-    next(err);
   }
+  next(err);
 };
 
 const boomErrorHandler = (err, req, res, next) => {
