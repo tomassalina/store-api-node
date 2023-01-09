@@ -27,11 +27,26 @@ const OrderSchema = {
     onUpdate: 'CASCADE',
     onDelete: 'SET NULL',
   },
+  total: {
+    type: DataTypes.VIRTUAL,
+    get() {
+      return this.items.reduce(
+        (total, item) => total + item.price * item.OrderProduct.amount,
+        0
+      );
+    },
+  },
 };
 
 class Order extends Model {
   static associate(models) {
     this.belongsTo(models.Customer, { as: 'customer' });
+    this.belongsToMany(models.Product, {
+      as: 'items',
+      through: models.OrderProduct,
+      foreignKey: 'orderId',
+      otherKey: 'productId',
+    });
   }
 
   static config(sequelize) {

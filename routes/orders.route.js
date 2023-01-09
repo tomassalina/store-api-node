@@ -3,6 +3,7 @@ const validatorHandler = require('../middlewares/validator.handler');
 const {
   getOrderSchema,
   createOrderSchema,
+  addItemSchema,
 } = require('../schemas/order.schema');
 const OrderService = require('../services/order.service');
 
@@ -40,6 +41,20 @@ router.post(
       const data = req.body;
       const newOrder = await service.create(data);
       res.json(newOrder);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+router.post(
+  '/add-item',
+  validatorHandler(addItemSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newItem = await service.addItem(body);
+      res.json(newItem);
     } catch (error) {
       next(error);
     }
