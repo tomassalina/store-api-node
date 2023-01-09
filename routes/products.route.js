@@ -6,19 +6,24 @@ const {
   getProductSchema,
   createProductSchema,
   updateProductSchema,
+  queryProductSchema,
 } = require('../schemas/product.schema');
 
 const router = express.Router();
 const service = new ProductService();
 
-router.get('/', async (req, res, next) => {
-  try {
-    const products = await service.find();
-    res.json(products);
-  } catch (err) {
-    next(err);
+router.get(
+  '/',
+  validatorHandler(queryProductSchema, 'query'),
+  async (req, res, next) => {
+    try {
+      const products = await service.find(req.query);
+      res.json(products);
+    } catch (err) {
+      next(err);
+    }
   }
-});
+);
 
 router.get(
   '/:id',
