@@ -1,3 +1,4 @@
+const { Op } = require('sequelize');
 const boom = require('@hapi/boom');
 
 const { models } = require('../libs/sequelize');
@@ -6,13 +7,21 @@ class ProductService {
   constructor() {}
 
   async find(query) {
-    const options = { include: ['category'] };
+    const options = { include: ['category'], where: {} };
+    const { limit, offset, price, price_min, price_max } = query;
 
-    const { limit, offset } = query;
     if (limit && offset) {
       options.limit = limit;
       options.offset = offset;
     }
+
+    if (price_min && price_max)
+      options.where.price = {
+        [Op.gte]: price_min,
+        [Op.lte]: price_max,
+      };
+
+    if (price) options.where.price = price;
 
     const products = await models.Product.findAll(options);
     return products;
