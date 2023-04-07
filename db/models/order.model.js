@@ -28,7 +28,7 @@ const OrderSchema = {
     onDelete: 'SET NULL',
   },
   total: {
-    type: DataTypes.VIRTUAL,
+    type: DataTypes.DECIMAL,
     get() {
       return this.items.reduce(
         (total, item) => total + item.price * item.OrderProduct.amount,
