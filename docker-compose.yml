@@ -11,6 +11,8 @@ services:
       DB_NAME: ${DB_NAME}
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
+      API_KEY: ${API_KEY}
+      API_SECRET: ${API_SECRET}
     volumes:
       - .:/usr/src
       - /usr/src/node_modules
