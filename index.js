@@ -28,6 +28,9 @@ const options = {
 };
 app.use(cors(options));
 
+// Strategies
+require('./utils/auth');
+
 // routes
 app.get('/', (req, res) => {
   res.send('Platzi Store API');
