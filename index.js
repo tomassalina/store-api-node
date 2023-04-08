@@ -7,6 +7,7 @@ const {
   boomErrorHandler,
   errorHandler,
 } = require('./middlewares/error.handler');
+const { checkApiKey } = require('./middlewares/auth.handler');
 const config = require('./config');
 
 const app = express();
@@ -33,6 +34,10 @@ app.get('/', (req, res) => {
 });
 
 routerApi(app);
+
+app.get('/api-key', checkApiKey, (req, res) => {
+  res.json({ apiKey: req.headers['api'] });
+});
 
 app.use(logErrors);
 app.use(ormErrorHandler);
