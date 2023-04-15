@@ -11,7 +11,6 @@ router.post(
   async (req, res, next) => {
     try {
       const user = req.user;
-      console.log(user);
 
       const payload = {
         sub: user.dataValues.id,
